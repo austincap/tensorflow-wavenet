@@ -19,19 +19,19 @@ from tensorflow.python.client import timeline
 
 from wavenet import WaveNetModel, AudioReader, optimizer_factory
 
-BATCH_SIZE = 1
-DATA_DIRECTORY = './VCTK-Corpus'
-LOGDIR_ROOT = './logdir'
+BATCH_SIZE = 16
+DATA_DIRECTORY = 'FF7-wave'
+LOGDIR_ROOT = 'logdir'
 CHECKPOINT_EVERY = 50
 NUM_STEPS = int(1e5)
-LEARNING_RATE = 1e-3
-WAVENET_PARAMS = './wavenet_params.json'
+LEARNING_RATE = 5e-4
+WAVENET_PARAMS = 'wavenet_params.json'
 STARTED_DATESTRING = "{0:%Y-%m-%dT%H-%M-%S}".format(datetime.now())
-SAMPLE_SIZE = 100000
-L2_REGULARIZATION_STRENGTH = 0
-SILENCE_THRESHOLD = 0.3
-EPSILON = 0.001
-MOMENTUM = 0.9
+SAMPLE_SIZE = 2336
+L2_REGULARIZATION_STRENGTH = 0.7#1.0
+SILENCE_THRESHOLD = 0.07
+EPSILON = 0.007
+MOMENTUM = 0.7
 MAX_TO_KEEP = 5
 METADATA = False
 

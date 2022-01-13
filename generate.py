@@ -5,6 +5,7 @@ import argparse
 from datetime import datetime
 import json
 import os
+import soundfile
 
 import librosa
 import numpy as np
@@ -12,10 +13,10 @@ import tensorflow as tf
 
 from wavenet import WaveNetModel, mu_law_decode, mu_law_encode, audio_reader
 
-SAMPLES = 16000
+SAMPLES = 112000
 TEMPERATURE = 1.0
-LOGDIR = './logdir'
-WAVENET_PARAMS = './wavenet_params.json'
+LOGDIR = 'logdir'
+WAVENET_PARAMS = 'wavenet_params.json'
 SAVE_EVERY = None
 SILENCE_THRESHOLD = 0.1
 
@@ -112,7 +113,7 @@ def get_arguments():
 
 def write_wav(waveform, sample_rate, filename):
     y = np.array(waveform)
-    librosa.output.write_wav(filename, y, sample_rate)
+    soundfile.write(filename, y, sample_rate)
     print('Updated wav file at {}'.format(filename))
 
 
@@ -134,6 +135,7 @@ def create_seed(filename,
 
 def main():
     args = get_arguments()
+    print(args)
     started_datestring = "{0:%Y-%m-%dT%H-%M-%S}".format(datetime.now())
     logdir = os.path.join(args.logdir, 'generate', started_datestring)
     with open(args.wavenet_params, 'r') as config_file:
